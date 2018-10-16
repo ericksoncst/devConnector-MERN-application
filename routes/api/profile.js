@@ -29,6 +29,7 @@ router.get('/' ,passport.authenticate(
     const errors = {};
 
     Profile.findOne({user: req.user.id})
+    .populate('user', ['name', 'avatar'])
     .then(profile => {
         if(!profile) {
             errors.noprofile = "There's no profile for this user!";
